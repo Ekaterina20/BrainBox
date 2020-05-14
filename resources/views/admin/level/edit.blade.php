@@ -72,10 +72,10 @@
                         <label for="type">Тип</label>
                         {!! Form::select('type', ['text' => 'Текст', 'link' => 'Ссылка', 'img' => 'Изображение'], null, ['class' => 'form-control', 'id' => 'type']) !!}
                     </div>
-                    <div class="form-group">
+                   {{-- <div class="form-group">
                         <label for="value">Контент</label>
                         <textarea rows="5" name="value" class="form-control" id="value" placeholder="Введите контент"></textarea>
-                    </div>
+                    </div>--}}
                     <div class="form-group">
                         <label for="file">Файл</label>
                         <div class="custom-file">
@@ -95,9 +95,10 @@
 
                     <div class="card-body">
                         <div class="form-group">
-                            <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+                            <textarea class="form-control" id="value" name="value"></textarea>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- /.card-body -->
@@ -282,7 +283,11 @@
 
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
-        CKEDITOR.replace( 'summary-ckeditor' );
+        CKEDITOR.replace( 'value', {
+            language: 'ru',
+            uiColor: '#CEF6F5'
+        });
+
     </script>
 
 </section>
