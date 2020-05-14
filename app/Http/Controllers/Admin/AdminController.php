@@ -31,7 +31,7 @@ class AdminController extends Controller
             'area' => ['required', 'integer'],
             'date_start' => ['required', 'date_format:d.m.Y H:i']
         ]);
-        
+
         $game = new Game();
         $game->fill($request->all());
         $game->user_id = $request->user()->id;
@@ -65,14 +65,14 @@ class AdminController extends Controller
         ]);
 
         $data = $request->only(['name', 'type', 'price', 'area']);
-        
+
         if ($request->filled('date_start')) $data['date_start'] = $request->input('date_start');
 
         $game = Game::find($request->input('id'));
-        
+
         $game->fill($data);
         $game->save();
-        
+
         if ($img = $request->file('preview')) $game->setPreview($img);
 
         return redirect()->back();
@@ -122,7 +122,7 @@ class AdminController extends Controller
 
         $level = Level::find($request->input('id'));
         $last_idx = $level->order;
-        
+
         $level->fill($data);
 
         if ($level->order < $last_idx) {
@@ -152,10 +152,10 @@ class AdminController extends Controller
     {
         $this->validate($request, [
             'level_id' => ['integer', 'required', 'exists:levels,id'],
-            'order' => ['integer', 'required'],
-            'type' => ['required'],
-            'value' => ['nullable'],
-            'file' => ['nullable']
+            /*'order' => ['integer', 'required'],*/
+           /* 'type' => ['required'],*/
+            'value' => ['required'],
+            /*'file' => ['nullable']*/
         ]);
 
         Attachment::add($request->except(['file']), $request->file('file'));
@@ -188,7 +188,7 @@ class AdminController extends Controller
 
         $attach = Attachment::find($request->input('id'));
         $last_idx = $attach->order;
-        
+
         $attach->fill($data);
         $attach->setFile($request->file('file'));
 
@@ -251,7 +251,7 @@ class AdminController extends Controller
 
         $answer = Answer::find($request->input('id'));
         $last_idx = $answer->order;
-        
+
         $answer->fill($data);
 
         if ($answer->order < $last_idx) {

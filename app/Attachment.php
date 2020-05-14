@@ -29,16 +29,17 @@ class Attachment extends Model
 
   protected $fillable = [
     'level_id',
-    'type',
+    /*'type',*/
     'value',
-    'order',
+    /*'order',*/
   ];
 
   protected $hidden = [
     'level_id',
     'created_at',
     'updated_at',
-    'order'
+    'order',
+     'type',
   ];
 
   //======================================================================
@@ -78,7 +79,7 @@ class Attachment extends Model
 
     static::where([
       ['level_id', $data['level_id']],
-      ['order', '>=', $data['order']]
+    /*  ['order', '>=', $data['order']]*/
     ])->increment('order');
 
     return $attach->save();
