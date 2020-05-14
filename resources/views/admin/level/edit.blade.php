@@ -34,7 +34,7 @@
                 @csrf
                 <input type="hidden" name="id" value="{{ $level->id }}">
 
-                <div class="card-body">   
+                <div class="card-body">
                     <div class="form-group">
                         <label for="order">Номер уровня</label>
                         <input type="number" value="{{ $level->order }}" name="order" class="form-control" id="order" placeholder="Введите номер">
@@ -63,7 +63,7 @@
                 @csrf
                 <input type="hidden" name="level_id" value="{{ $level->id }}">
 
-                <div class="card-body">                    
+                <div class="card-body">
                     <div class="form-group">
                         <label for="order">Номер блока</label>
                         <input type="number" name="order" class="form-control" id="order" placeholder="Введите номер">
@@ -84,6 +84,22 @@
                         </div>
                     </div>
                 </div>
+
+                {{--Add Ckeditor--}}
+
+                <div class="card card-primary">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Редактор уровня</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- /.card-body -->
                 <div class="card-footer text-right">
                     <button type="submit" class="btn btn-primary">Добавить</button>
@@ -143,7 +159,7 @@
                 @csrf
                 <input type="hidden" name="level_id" value="{{ $level->id }}">
 
-                <div class="card-body">                    
+                <div class="card-body">
                     <div class="form-group">
                         <label for="order">Номер ответа</label>
                         <input type="number" name="order" class="form-control" id="order" placeholder="Введите номер">
@@ -207,7 +223,7 @@
                 @csrf
                 <input type="hidden" name="level_id" value="{{ $level->id }}">
 
-                <div class="card-body">                    
+                <div class="card-body">
                     <div class="form-group">
                         <label for="delay">Доступна через (мин)</label>
                         <input type="number" name="delay" class="form-control" id="delay" placeholder="Введите кол-во минут">
@@ -261,6 +277,14 @@
                 </div>
             </div>
     </div><!-- /.container-fluid -->
+
+    <!--Ckeditor-->
+
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace( 'summary-ckeditor' );
+    </script>
+
 </section>
 <!-- /.content -->
 

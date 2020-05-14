@@ -3,14 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use \Storage;
+use Illuminate\Support\Str;
+/*use \Storage;*/
+use Illuminate\Support\Facades\Storage;
 
 class Attachment extends Model
 {
   //======================================================================
   // Variables
   //======================================================================
-  
+
   protected const TYPE = [
     'text',
     'img',
@@ -24,7 +26,7 @@ class Attachment extends Model
   //======================================================================
   // Settings
   //======================================================================
-  
+
   protected $fillable = [
     'level_id',
     'type',
@@ -42,7 +44,7 @@ class Attachment extends Model
   //======================================================================
   // Getters
   //======================================================================
-  
+
   public function getTypeAttribute($type)
   {
     return self::TYPE[$type];
@@ -78,7 +80,7 @@ class Attachment extends Model
       ['level_id', $data['level_id']],
       ['order', '>=', $data['order']]
     ])->increment('order');
-    
+
     return $attach->save();
   }
 
@@ -100,7 +102,7 @@ class Attachment extends Model
 
     $this->removeFile();
 
-    $filename = str_random(10) . '.' . $file->extension();
+    $filename = Str::random(10) . '.' . $file->extension();
     $file->storeAs(static::PATH, $filename);
 
     $this->value = $filename;
